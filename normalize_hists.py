@@ -1,5 +1,6 @@
 import ROOT
 
+
 input_file = ROOT.TFile.Open("merge.root")
 output_file = ROOT.TFile("merge_normalized.root", "RECREATE")
 input_dir = input_file.Get("plots")
