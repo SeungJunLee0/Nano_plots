@@ -43,6 +43,7 @@ def normalize_by_y(hist2d):
 
 # 정규화 대상 리스트
 targets = [
+    "topmass_vs_true_gen_b_gl_nu",
     "topmass_vs_last_gen_b_gl_nu",
     "last_gen_b_gl_nu_vs_gen_j_l_nu",
     "last_gen_w_mass_vs_reco_w_mass",
@@ -79,6 +80,7 @@ for key in targets:
             norm = normalize_by_y(h)
         if axis_choice == "x":
             norm = normalize_by_x(h)
+        norm.SetEntries(h.GetEntries())  # ✅ 원래 entries 수 복원
         norm.Write()
 
 output_file.Close()
