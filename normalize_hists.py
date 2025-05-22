@@ -13,6 +13,7 @@ def normalize_by_x(hist2d):
     nbins_y = hist2d.GetNbinsY()
     normalized = hist2d.Clone(hist2d.GetName() + "_normX")
     normalized.Reset()
+    normalized.Sumw2()
 
     for x in range(1, nbins_x + 1):
         total = sum(hist2d.GetBinContent(x, y) for y in range(1, nbins_y + 1))
@@ -30,6 +31,7 @@ def normalize_by_y(hist2d):
     nbins_y = hist2d.GetNbinsY()
     normalized = hist2d.Clone(hist2d.GetName() + "_normY")
     normalized.Reset()
+    normalized.Sumw2()
 
     for y in range(1, nbins_y + 1):
         total = sum(hist2d.GetBinContent(x, y) for x in range(1, nbins_x + 1))
@@ -65,11 +67,18 @@ targets = [
     "true_w_boson_vs_true_l_nu",
     "last_w_boson_vs_true_l_nu"
 ]
+axis_choice = input("정규화할 축을 선택하세요 (x/y): ").strip().lower()
+if axis_choice not in ['x', 'y']:
+    print("❌ 잘못된 입력입니다. 'x' 또는 'y'를 입력하세요.")
+    exit(1)
 
 for key in targets:
     h = input_dir.Get(key)
     if h and isinstance(h, ROOT.TH2F):
-        norm = normalize_by_y(h)
+        if axis_choice == "y":
+            norm = normalize_by_y(h)
+        if axis_choice == "x":
+            norm = normalize_by_x(h)
         norm.Write()
 
 output_file.Close()
