@@ -8,6 +8,23 @@ input_dir = input_file.Get("plots")
 output_file.mkdir("plots")
 output_file.cd("plots")
 
+def normalize_by_x(hist2d):
+    nbins_x = hist2d.GetNbinsX()
+    nbins_y = hist2d.GetNbinsY()
+    normalized = hist2d.Clone(hist2d.GetName() + "_normX")
+    normalized.Reset()
+
+    for x in range(1, nbins_x + 1):
+        total = sum(hist2d.GetBinContent(x, y) for y in range(1, nbins_y + 1))
+        if total == 0:
+            continue
+        for y in range(1, nbins_y + 1):
+            content = hist2d.GetBinContent(x, y) / total
+            normalized.SetBinContent(x, y, content)
+
+    return normalized
+
+
 def normalize_by_y(hist2d):
     nbins_x = hist2d.GetNbinsX()
     nbins_y = hist2d.GetNbinsY()
