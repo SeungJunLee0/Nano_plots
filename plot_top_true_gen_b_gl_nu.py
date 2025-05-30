@@ -13,7 +13,7 @@ if not plots:
 
 # 3) 히스토그램 가져오기
 h_top  = plots.Get("topmass")       # merge.root 안의 hist 이름
-h_true = plots.Get("true_gen_b_gl_nu")   # merge.root 안의 hist 이름
+h_true = plots.Get("gen_b_gl_nu")   # merge.root 안의 hist 이름
 
 if not h_top or not h_true:
     # 키가 뭔지 찍어보고
@@ -40,7 +40,7 @@ h_true.Draw("HIST SAME")       # 그 위에 파란색
 # 6) 범례 추가
 leg = ROOT.TLegend(0.6, 0.7, 0.88, 0.88)
 leg.AddEntry(h_top,  "Reconstructed top mass",    "l")
-leg.AddEntry(h_true, "True b+ℓ+ν invariant mass",  "l")
+leg.AddEntry(h_true, "last b+ℓ+ν invariant mass",  "l")
 leg.Draw()
 
 # 7) 결과 저장
