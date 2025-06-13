@@ -2,8 +2,8 @@ import ROOT
 ROOT.gROOT.SetBatch(True)  # ✅ GUI 없이 그림 저장만 하도록 설정
 
 # 입력 및 출력 경로
-input_root = "merge_normalized.root"
-#input_root = "merge.root"
+#input_root = "merge_normalized.root"
+input_root = "merge.root"
 output_root = "result.root"
 
 # 열기

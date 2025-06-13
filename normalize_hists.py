@@ -43,6 +43,7 @@ def normalize_by_y(hist2d):
 
 # 정규화 대상 리스트
 targets = [
+    "topmass_vs_gen_j_l_nu",
     "topmass_vs_true_gen_b_gl_nu",
     "topmass_vs_last_gen_b_gl_nu",
     "last_gen_b_gl_nu_vs_gen_j_l_nu",
